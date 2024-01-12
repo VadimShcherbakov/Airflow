@@ -1,5 +1,13 @@
 version: '3'
 services:
+ # Админер в отдельном контейнере
+  adminer:
+    image: adminer
+    restart: always
+    depends_on: 
+    - postgres
+    ports:
+      - 8080:8080
   # Постгрес база в отдельном контейнере
   postgres:
     # Устанавливаем готовый образ
@@ -14,6 +22,7 @@ services:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+    
 
   # Airflow в отдельном контейнере
   airflow:
