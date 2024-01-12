@@ -21,6 +21,9 @@ ARG AIRFLOW_VERSION=2.1.4
 ENV AIRFLOW__CORE__DAGS_FOLDER=/usr/local/airflow/dags 
 ENV AIRFLOW__CORE__PLUGINS_FOLDER=/usr/local/airflow/plugins
 
+# установка ключа шифрования
+ENV AIRFLOW__CORE__FERNET_KEY='YvEM2vqBT3KHBn-Ejc55mPxQ6q-75g0gdHxCb9eDw24='
+
 # Замени executor и сменим бд на постгрес
 ENV AIRFLOW__CORE__EXECUTOR=LocalExecutor
 ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN="postgresql+psycopg2://postgres:postgres@postgres:5432/airflow"
@@ -28,6 +31,8 @@ ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN="postgresql+psycopg2://postgres:postgres@pos
 # Отключим примеры кода
 ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
 
+# Установка flask-bcrypt
+RUN pip install flask-bcrypt
 # Установка airflow с поддержкой всех баз данных
 RUN pip install apache-airflow[postgres]==${AIRFLOW_VERSION}
 
