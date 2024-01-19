@@ -26,7 +26,7 @@ ENV AIRFLOW__CORE__FERNET_KEY='YvEM2vqBT3KHBn-Ejc55mPxQ6q-75g0gdHxCb9eDw24='
 
 # Замени executor и сменим бд на постгрес
 ENV AIRFLOW__CORE__EXECUTOR=LocalExecutor
-ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN="postgresql+psycopg2://postgres:postgres@postgres:5432/airflow"
+ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgres://airflow:ghwf94hfw8@postgres:5432/airflow
 
 # Отключим примеры кода
 ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
@@ -35,6 +35,8 @@ ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
 RUN pip install flask-bcrypt
 # Установка airflow с поддержкой всех баз данных
 RUN pip install apache-airflow[postgres]==${AIRFLOW_VERSION}
+
+RUN pip install SQLAlchemy==1.3.24
 
 # Установка визуального редактора для работы в Airflow UI
 # Дополнительная настройка чтобы можно было редактировать код
